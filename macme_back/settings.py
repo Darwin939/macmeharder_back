@@ -36,7 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'main.apps.MainConfig'
+    'graphene_django',
+    'main'
 ]
 
 MIDDLEWARE = [
@@ -114,3 +115,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+GRAPHENE = {
+    'SCHEMA': 'macme_back.api.schema',
+}
