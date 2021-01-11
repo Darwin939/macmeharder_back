@@ -1,1 +1,1 @@
-web: gunicorn macme_back.wsgi
+web: gunicorn config.wsgi
