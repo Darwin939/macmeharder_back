@@ -1,6 +1,8 @@
 from django.db import models
 
 
+APP_IMAGE_FOLDER =  "staticfiles/server_images/apps"
+
 class App_Category(models.Model):
     name = models.CharField(max_length=200, blank=True, default='')
 
@@ -28,12 +30,27 @@ class Apps(models.Model):
     chart = models.CharField(blank=True, max_length=300, null=True)
     version = models.CharField(blank=True, max_length=300, null=True)
     compatibility = models.CharField(blank=True, max_length=400, null=True)
-
+    # main_image
+    # screens
+    # main_image = models.ImageField(upload_to=APP_IMAGE_FOLDER)
 
     class Meta:
-        verbose_name = 'Приложения'
-        verbose_name_plural = 'Приложения'
+        verbose_name = 'Apps'
+        verbose_name_plural = 'Apps'
         ordering = ['created']
 
     def __str__(self):
         return self.title
+
+class AppImages(models.Model):
+    main_image = models.ImageField(upload_to=APP_IMAGE_FOLDER)
+    is_avatar = models.BooleanField(default=False)
+    app = models.ForeignKey(Apps,on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = 'AppImages'
+        verbose_name_plural = 'AppImages'
+
+
+    def __str__():
+        return "image"
