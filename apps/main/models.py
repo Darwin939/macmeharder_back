@@ -12,7 +12,7 @@ class App_Category(models.Model):
     def __str__(self):
         return self.name
 
-
+#sd
 class Apps(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=200, blank=True, default='')
