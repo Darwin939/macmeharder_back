@@ -24,7 +24,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'graphene_django',
-    'apps.main'
+    'apps.apps',
+    'apps.posts'
 ]
 
 MIDDLEWARE = [
@@ -114,3 +115,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
 GRAPHENE = {
     'SCHEMA': 'config.schema.schema',
 }
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'server_images')
+MEDIA_URL = '/server_images/'

@@ -1,14 +1,12 @@
 from django.db import models
 
 
-APP_IMAGE_FOLDER =  "staticfiles/server_images/apps"
-
 class App_Category(models.Model):
     name = models.CharField(max_length=200, blank=True, default='')
 
     class Meta:
-        verbose_name = 'Категория Приложении'
-        verbose_name_plural = 'Категор_прил'
+        verbose_name = 'App Category'
+        verbose_name_plural = 'App_Category'
         ordering = ['name']
 
     def __str__(self):
@@ -35,22 +33,19 @@ class Apps(models.Model):
     # main_image = models.ImageField(upload_to=APP_IMAGE_FOLDER)
 
     class Meta:
-        verbose_name = 'Apps'
-        verbose_name_plural = 'Apps'
+        verbose_name = 'apps'
+        verbose_name_plural = 'apps'
         ordering = ['created']
 
     def __str__(self):
         return self.title
 
 class AppImages(models.Model):
-    main_image = models.ImageField(upload_to=APP_IMAGE_FOLDER)
+    main_image = models.ImageField(upload_to='apps/')
     is_avatar = models.BooleanField(default=False)
     app = models.ForeignKey(Apps,on_delete=models.CASCADE)
 
     class Meta:
-        verbose_name = 'AppImages'
-        verbose_name_plural = 'AppImages'
+        verbose_name = 'App Images'
+        verbose_name_plural = 'App_Images'
 
-
-    def __str__():
-        return "image"
