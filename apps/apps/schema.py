@@ -23,13 +23,6 @@ class Query(graphene.ObjectType):
     app_images = graphene.List(ImagesNode)
     app = graphene.Field(AppsNode)
 
-    def resolve_app(self,info,app_id):
-        """
-        :param info:
-        :param id:
-        :return:
-        """
-        return Apps.objects.get(id=app_id)
 
     def resolve_app_categories(self, info):
         return App_Category.objects.all()
@@ -66,6 +59,12 @@ class Mutation(graphene.ObjectType):
             return False
         return True
 
-    def resolve_toggle_app(self, info, app_id):
+    def resolve_app(self, info, app_id):
+        """
+        :param info:
+        :param app_id:
+        :return: app data
+        """
         app = Apps.objects.get(id=app_id)
         return app
+
