@@ -43,7 +43,7 @@ class Apps(models.Model):
 class AppImages(models.Model):
     main_image = models.ImageField(upload_to='apps/')
     is_avatar = models.BooleanField(default=False)
-    app = models.ForeignKey(Apps,on_delete=models.CASCADE)
+    app = models.ForeignKey(Apps, related_name='app_images',on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'App Images'
