@@ -28,9 +28,6 @@ class Apps(models.Model):
     chart = models.CharField(blank=True, max_length=300, null=True)
     version = models.CharField(blank=True, max_length=300, null=True)
     compatibility = models.CharField(blank=True, max_length=400, null=True)
-    # main_image
-    # screens
-    # main_image = models.ImageField(upload_to=APP_IMAGE_FOLDER)
 
     class Meta:
         verbose_name = 'apps'
