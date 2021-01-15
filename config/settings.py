@@ -114,6 +114,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
 
 GRAPHENE = {
     'SCHEMA': 'config.schema.schema',
+    'SCHEMA_OUTPUT' : 'data/schema.graphql',
+    'SCHEMA_INDENT': 0
 }
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'server_images')

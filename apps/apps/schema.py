@@ -21,7 +21,7 @@ class Query(graphene.ObjectType):
     apps_list = graphene.List(AppsNode)
     app_categories = graphene.List(AppCategoryNode)
     app_images = graphene.List(ImagesNode)
-    app = graphene.Field(AppsNode)
+    app = graphene.Field(AppsNode,app_id=graphene.ID())
 
 
     def resolve_app_categories(self, info):
@@ -32,6 +32,13 @@ class Query(graphene.ObjectType):
 
     def resolve_images_list(self,info):
         return AppImages.objects.all().order_by('-id')
+
+    def resolve_app(self, info, app_id):
+        """
+        :return: app data
+        """
+        app = Apps.objects.get(id=app_id)
+        return app
 
 
 class Mutation(graphene.ObjectType):
@@ -46,7 +53,7 @@ class Mutation(graphene.ObjectType):
                              category=graphene.String(required=True))
 
     remove_app = graphene.Field(graphene.Boolean, app_id=graphene.ID())
-    toggle_app = graphene.Field(AppsNode, app_id=graphene.ID())
+
 
     def resolve_add_app(self, info, **kwargs):
         category, _ = App_Category.objects.get_or_create(name=kwargs.pop('category'))
@@ -58,13 +65,4 @@ class Mutation(graphene.ObjectType):
         except Apps.DoesNotExist:
             return False
         return True
-
-    def resolve_app(self, info, app_id):
-        """
-        :param info:
-        :param app_id:
-        :return: app data
-        """
-        app = Apps.objects.get(id=app_id)
-        return app
 

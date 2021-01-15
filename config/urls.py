@@ -18,9 +18,10 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from graphene_django.views import GraphQLView
-
+from .views import show_chema
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('graphql/', GraphQLView.as_view(graphiql=settings.DEBUG))
+    path('graphql/', GraphQLView.as_view(graphiql=settings.DEBUG)),
+    path('schema/', show_chema)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
