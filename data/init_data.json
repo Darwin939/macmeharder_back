@@ -72,5 +72,15 @@
       "compatibility": "MacOS BigSure",
       "category": 1
     }
-  }
+  },
+   { "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "username": "admin",
+            "password": "pbkdf2_sha256$216000$L8CEEH3vavsz$8ZhY1T7bLlppERDKHGnNTxxa19pR4SbKf2JudklkSLI=",
+            "is_superuser": true,
+            "is_staff": true,
+            "is_active": true
+        }
+    }
 ]
