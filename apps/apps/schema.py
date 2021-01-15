@@ -15,6 +15,11 @@ class AppsNode(DjangoObjectType):
 class ImagesNode(DjangoObjectType):
     class Meta:
         model = AppImages
+    url = graphene.String()
+
+    def resolve_url(self,info):
+        url = self.main_image.url
+        return url
 
 class Query(graphene.ObjectType):
     """ Описываем запросы и возвращаемые типы данных """
