@@ -68,10 +68,10 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'jbahlewe',
-        'USER': 'jbahlewe',
-        'PASSWORD': 'ZNz1klWGTx5TOfA3MPbwypg-wPiq4zju',
-        'HOST': 'hattie.db.elephantsql.com',
+        'NAME': 'd4uf4v6nss8tu6',
+        'USER': 'xzhafwqdegpswy',
+        'PASSWORD': '542c0f855c1fadba9f4ee12c0785c45b844785b8fd48d221a7ea1e7182958a4e',
+        'HOST': 'ec2-99-81-238-134.eu-west-1.compute.amazonaws.com',
         'PORT': '5432',
     }
 }
@@ -120,5 +120,5 @@ GRAPHENE = {
     'SCHEMA_INDENT': 0
 }
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'server_images')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'staticfiles/server_images')
 MEDIA_URL = '/server_images/'

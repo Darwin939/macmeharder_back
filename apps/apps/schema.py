@@ -15,6 +15,8 @@ class AppsNode(DjangoObjectType):
 class ImagesNode(DjangoObjectType):
     class Meta:
         model = AppImages
+        exclude = ('mainImage',)
+
     url = graphene.String()
 
     def resolve_url(self,info):
