@@ -1,6 +1,7 @@
 
 from pathlib import Path
 import os
+from corsheaders.defaults import default_headers
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'graphene_django',
     'apps.apps',
-    'apps.posts'
+    'apps.posts',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -34,6 +36,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -122,3 +125,7 @@ GRAPHENE = {
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'staticfiles/server_images')
 MEDIA_URL = '/server_images/'
+
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_HEADERS = default_headers + ('cache-control', 'cookies')
+CORS_ORIGIN_ALLOW_ALL = True  # change in production
