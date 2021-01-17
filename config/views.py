@@ -12,7 +12,7 @@ def show_chema(request):
     #
     # return HttpResponse(data)
 
-    file = open('./data/schema.graphql', 'rt')
+    file = open('./data/schema.graphql', 'rb')
 
     response = FileResponse(file)
 
