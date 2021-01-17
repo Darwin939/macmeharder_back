@@ -71,5 +71,7 @@ class Mutation(graphene.ObjectType):
             return False
         return True
 
+class MyType(graphene.ObjectType):
+    something = graphene.String()
 
-schema = graphene.Schema(query=Query, mutation=Mutation)
+schema = graphene.Schema(query=Query, mutation=Mutation , types = [MyType])
