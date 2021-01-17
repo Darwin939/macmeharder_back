@@ -6,7 +6,9 @@ from apps.posts.schema import PostNode
 
 class Query(graphene.ObjectType):
     """ Описываем запросы и возвращаемые типы данных """
-    apps_list = graphene.List(AppsNode)
+    apps_list = graphene.List(AppsNode,
+                              page = graphene.Int(),
+                              count = graphene.Int())
     app_categories = graphene.List(AppCategoryNode)
     app_images = graphene.List(ImagesNode)
     app = graphene.Field(AppsNode, app_id=graphene.ID())
@@ -15,8 +17,11 @@ class Query(graphene.ObjectType):
     def resolve_app_categories(self, info):
         return App_Category.objects.all()
 
-    def resolve_apps_list(self, info):
-        return Apps.objects.all().order_by('-id')
+    def resolve_apps_list(self, info, page = 1, count = 10):
+        apps = Apps.objects.all().order_by('-id')
+        if page != 1 or page != 10:
+            apps = apps[(page-1)*(count):(page)*count]
+        return apps
 
     def resolve_images_list(self,info):
         return AppImages.objects.all().order_by('-id')

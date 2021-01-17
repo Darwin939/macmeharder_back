@@ -35,6 +35,7 @@ type ImagesNode {
   mainImage: String!
   isAvatar: Boolean!
   app: AppsNode!
+  url: String
 }
 
 type Mutation {
@@ -42,9 +43,27 @@ type Mutation {
   removeApp(appId: ID): Boolean
 }
 
+type PostImageNode {
+  id: ID!
+  image: String!
+  isAvatar: Boolean!
+  post: PostNode!
+}
+
+type PostNode {
+  id: ID!
+  created: DateTime!
+  title: String!
+  miniTitle: String
+  body: String
+  postImages: [PostImageNode!]!
+}
+
 type Query {
-  appsList: [AppsNode]
+  appsList(page: Int, count: Int): [AppsNode]
   appCategories: [AppCategoryNode]
   appImages: [ImagesNode]
   app(appId: ID): AppsNode
+  post(postId: ID): PostNode
+  postList: [PostNode]
 }
