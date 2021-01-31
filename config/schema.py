@@ -1,26 +1,41 @@
 import graphene
-from apps.apps.models import Apps, App_Category, AppImages
-from apps.apps.schema import AppsNode, AppCategoryNode, ImagesNode
+from apps.apps.models import Apps, App_Category, AppImages ,AppAvatar
+from apps.apps.schema import AppsNode, AppCategoryNode, ImagesNode , AppAvatarNode
 from apps.posts.models import Post
 from apps.posts.schema import PostNode
 
+
+
+
 class Query(graphene.ObjectType):
     """ Описываем запросы и возвращаемые типы данных """
+
     apps_list = graphene.List(AppsNode,
                               page = graphene.Int(),
                               count = graphene.Int())
-    app_categories = graphene.List(AppCategoryNode)
-    app_images = graphene.List(ImagesNode)
-    app = graphene.Field(AppsNode, app_id=graphene.ID())
+    app_categories = graphene.List(AppCategoryNode,
+                                   page=graphene.Int(),
+                                   count=graphene.Int()
+                                   )
+    app_images = graphene.List(ImagesNode,
+                               page=graphene.Int(),
+                               count=graphene.Int()
+                               )
+    app = graphene.Field(AppsNode, app_id=graphene.ID(),)
+    app_avatar = graphene.Field(AppAvatarNode, app_avatar_id = graphene.ID(),)
+
+    def resolve_app_avatar(self,info,app_avatar_id):
+        avatar = Apps.objects.get(id=app_avatar_id)
+        return avatar
+
+    def resolve_app_categories(self, info,page = 1 , count = 10):
+        app_categories = App_Category.objects.all()
+        return app_categories[(page - 1) * (count):(page) * count]  # pagination
 
 
-    def resolve_app_categories(self, info):
-        return App_Category.objects.all()
-
-    def resolve_apps_list(self, info, page = 1, count = 10):
+    def resolve_apps_list(self, info, page = 1 , count = 10 ):
         apps = Apps.objects.all().order_by('-id')
-        if page != 1 or page != 10:
-            apps = apps[(page-1)*(count):(page)*count]
+        apps = apps[(page-1)*(count):(page)*count]  #pagination
         return apps
 
     def resolve_images_list(self,info):
@@ -71,7 +86,5 @@ class Mutation(graphene.ObjectType):
             return False
         return True
 
-class MyType(graphene.ObjectType):
-    something = graphene.String()
 
-schema = graphene.Schema(query=Query, mutation=Mutation , types = [MyType])
+schema = graphene.Schema(query=Query, mutation=Mutation )
