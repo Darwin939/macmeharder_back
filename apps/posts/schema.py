@@ -10,3 +10,9 @@ class PostNode(DjangoObjectType):
 class PostImageNode(DjangoObjectType):
     class Meta:
         model = PostImages
+
+    url = graphene.String()
+
+    def resolve_url(self, info):
+        url = self.image.url
+        return url
