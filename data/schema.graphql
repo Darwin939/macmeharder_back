@@ -32,6 +32,7 @@ type AppsNode {
   chart: String
   version: String
   compatibility: String
+  downloadUrl: String
   appImages: [ImagesNode!]!
   appAvatar: [AppAvatarNode!]!
 }
