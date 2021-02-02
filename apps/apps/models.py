@@ -28,6 +28,7 @@ class Apps(models.Model):
     chart = models.CharField(blank=True, max_length=300, null=True)
     version = models.CharField(blank=True, max_length=300, null=True)
     compatibility = models.CharField(blank=True, max_length=400, null=True)
+    download_url = models.CharField(blank=True,max_length=1000,null=True)
 
     class Meta:
         verbose_name = 'apps'
