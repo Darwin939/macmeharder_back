@@ -57,6 +57,7 @@ type PostImageNode {
   image: String!
   isAvatar: Boolean!
   post: PostNode!
+  url: String
 }
 
 type PostNode {
