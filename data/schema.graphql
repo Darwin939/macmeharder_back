@@ -3,6 +3,13 @@ schema {
   mutation: Mutation
 }
 
+type AppAvatarNode {
+  id: ID!
+  image: String!
+  app: AppsNode!
+  url: String
+}
+
 type AppCategoryNode {
   id: ID!
   name: String!
@@ -26,6 +33,7 @@ type AppsNode {
   version: String
   compatibility: String
   appImages: [ImagesNode!]!
+  appAvatar: [AppAvatarNode!]!
 }
 
 scalar DateTime
@@ -60,10 +68,11 @@ type PostNode {
 }
 
 type Query {
-  appsList(page: Int, count: Int): [AppsNode]
-  appCategories: [AppCategoryNode]
-  appImages: [ImagesNode]
+  appsList(page: Int, count: Int, category: Int): [AppsNode]
+  appCategories(page: Int, count: Int): [AppCategoryNode]
+  appImages(page: Int, count: Int): [ImagesNode]
   app(appId: ID): AppsNode
+  appAvatar(appAvatarId: ID): AppAvatarNode
   post(postId: ID): PostNode
-  postList: [PostNode]
+  postList(page: Int, count: Int, category: Int): [PostNode]
 }

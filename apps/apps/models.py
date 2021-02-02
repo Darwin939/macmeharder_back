@@ -46,6 +46,8 @@ class AppImages(models.Model):
         verbose_name = 'App Images'
         verbose_name_plural = 'App_Images'
 
+
 class AppAvatar(models.Model):
     image = models.ImageField(upload_to='apps/')
     app = models.ForeignKey(Apps, related_name='app_avatar',on_delete=models.CASCADE)
+

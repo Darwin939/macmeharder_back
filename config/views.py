@@ -17,3 +17,4 @@ def show_chema(request):
     # response = FileResponse(file)
     #
     # return response
+

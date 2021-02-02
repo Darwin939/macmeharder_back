@@ -12,7 +12,8 @@ class Query(graphene.ObjectType):
 
     apps_list = graphene.List(AppsNode,
                               page = graphene.Int(),
-                              count = graphene.Int())
+                              count = graphene.Int(),
+                              category = graphene.Int())
     app_categories = graphene.List(AppCategoryNode,
                                    page=graphene.Int(),
                                    count=graphene.Int()
@@ -33,8 +34,11 @@ class Query(graphene.ObjectType):
         return app_categories[(page - 1) * (count):(page) * count]  # pagination
 
 
-    def resolve_apps_list(self, info, page = 1 , count = 10 ):
-        apps = Apps.objects.all().order_by('-id')
+    def resolve_apps_list(self, info, page = 1 , count = 10, category = None ):
+        if category is not None:
+            apps = Apps.objects.all().order_by('-id').filter(category_id=category)
+        else:
+            apps = Apps.objects.all().order_by('-id')
         apps = apps[(page-1)*(count):(page)*count]  #pagination
         return apps
 
@@ -56,10 +60,19 @@ class Query(graphene.ObjectType):
         post = Post.objects.get(id = post_id)
         return  post
 
-    post_list = graphene.List(PostNode)
+    post_list = graphene.List(PostNode,
+                              page = graphene.Int(),
+                              count = graphene.Int(),
+                              category = graphene.Int())
 
-    def resolve_post_list(self,info):
-        return Post.objects.all().order_by('-id')
+    def resolve_post_list(self,info,page = 1 , count = 10 , category = None):
+        if category is not None:
+            posts = Post.objects.all().order_by('-id').filter(category_id = category)
+        else:
+            posts = Post.objects.all().order_by('-id')
+        posts = posts[(page - 1) * (count):(page) * count]
+        return posts
+
 
 class Mutation(graphene.ObjectType):
     add_app = graphene.Field(AppsNode,
